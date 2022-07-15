@@ -13,7 +13,7 @@ public class OrderItem {
 	private long cartID;
 
 	private Product itemTypeOfProduct;
-	private long produuctID;
+	private long productID;
 	// 3 red cars -- 1st item, 5 blue pencils -- 2nd Item
 	private int orderItemCount;
 
@@ -51,12 +51,12 @@ public class OrderItem {
 		this.itemTypeOfProduct = itemTypeOfProduct;
 	}
 
-	public long getProduuctID() {
-		return produuctID;
+	public long getProductID() {
+		return productID;
 	}
 
-	public void setProduuctID(long produuctID) {
-		this.produuctID = produuctID;
+	public void setProductID(long produuctID) {
+		this.productID = produuctID;
 	}
 
 	public int getOrderItemCount() {
@@ -68,6 +68,7 @@ public class OrderItem {
 	}
 
 	public double getCostPerItem() {
+		costPerItem = this.itemTypeOfProduct.getProductCost()*this.orderItemCount;
 		return costPerItem;
 	}
 
@@ -78,13 +79,13 @@ public class OrderItem {
 	@Override
 	public String toString() {
 		return "OrderItem [orderItemID=" + orderItemID + ", itemTaggedToCart=" + itemTaggedToCart + ", cartID=" + cartID
-				+ ", itemTypeOfProduct=" + itemTypeOfProduct + ", produuctID=" + produuctID + ", orderItemCount="
+				+ ", itemTypeOfProduct=" + itemTypeOfProduct + ", produuctID=" + productID + ", orderItemCount="
 				+ orderItemCount + ", costPerItem=" + costPerItem + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cartID, orderItemCount, orderItemID, produuctID);
+		return Objects.hash(cartID, orderItemCount, orderItemID, productID);
 	}
 
 	@Override
@@ -97,7 +98,7 @@ public class OrderItem {
 			return false;
 		OrderItem other = (OrderItem) obj;
 		return cartID == other.cartID && orderItemCount == other.orderItemCount && orderItemID == other.orderItemID
-				&& produuctID == other.produuctID;
+				&& productID == other.productID;
 	}
 	
 	

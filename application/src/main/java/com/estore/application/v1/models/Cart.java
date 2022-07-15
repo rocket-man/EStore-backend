@@ -19,7 +19,7 @@ public class Cart {
 
 	@OneToOne
 	private User taggedUser;
-	
+
 	@OneToMany
 	private List<OrderItem> items;
 
@@ -42,6 +42,9 @@ public class Cart {
 	}
 
 	public double getCartTotal() {
+		// try list.stream to add item.costPerItem
+		cartTotal  += this.items.iterator().next().getCostPerItem();
+		//.forEach((item) -> item.getCostPerItem());
 		return cartTotal;
 	}
 
