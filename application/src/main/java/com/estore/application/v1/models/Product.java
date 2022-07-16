@@ -25,6 +25,10 @@ public class Product {
 
 	private Set<String> productTags;
 
+	private String productStatus;
+
+	private String productImage;
+
 	public long getProductID() {
 		return productID;
 	}
@@ -71,6 +75,22 @@ public class Product {
 
 	public void setProductTags(Set<String> productTags) {
 		this.productTags = productTags;
+	}
+
+	public String getProductStatus() {
+		return productStatus;
+	}
+
+	public void setProductStatus(String productStatus) {
+		this.productStatus = productStatus;
+	}
+
+	public String getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
 	}
 
 	@Override

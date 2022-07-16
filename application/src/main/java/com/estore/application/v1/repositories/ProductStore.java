@@ -1,5 +1,9 @@
 package com.estore.application.v1.repositories;
 
-public class ProductStore {
+import org.springframework.data.repository.CrudRepository;
+
+import com.estore.application.v1.models.Product;
+
+public interface ProductStore extends CrudRepository<Product, Long> {
 
 }
