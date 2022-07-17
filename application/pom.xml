@@ -14,7 +14,7 @@
 	<name>EStore</name>
 	<description>EStore application</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<spring-cloud-azure.version>4.3.0</spring-cloud-azure.version>
 		<spring-cloud-gcp.version>3.3.0</spring-cloud-gcp.version>
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
