@@ -2,61 +2,56 @@ package com.estore.application.v1.models;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+@Entity
 public class OrderItem {
 
-	private long orderItemID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long orderItemId;
 
-	private Cart itemTaggedToCart;
-	@ManyToOne
-	private long cartID;
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	private Cart cartIdFk;
 
-	private Product itemTypeOfProduct;
-	private long productID;
+	@OneToOne
+	private Product productIdFk;
 	// 3 red cars -- 1st item, 5 blue pencils -- 2nd Item
+
+	@Column(nullable = false)
 	private int orderItemCount;
 
 	private double costPerItem;
 
 	public long getOrderItemID() {
-		return orderItemID;
+		return orderItemId;
 	}
 
 	public void setOrderItemID(long orderItemID) {
-		this.orderItemID = orderItemID;
+		this.orderItemId = orderItemID;
 	}
 
-	public Cart getItemTaggedToCart() {
-		return itemTaggedToCart;
+	public Cart getCartID() {
+		return cartIdFk;
 	}
 
-	public void setItemTaggedToCart(Cart itemTaggedToCart) {
-		this.itemTaggedToCart = itemTaggedToCart;
+	public void setCartID(Cart cartID) {
+		this.cartIdFk = cartID;
 	}
 
-	public long getCartID() {
-		return cartID;
+	public Product getProductID() {
+		return productIdFk;
 	}
 
-	public void setCartID(long cartID) {
-		this.cartID = cartID;
-	}
-
-	public Product getItemTypeOfProduct() {
-		return itemTypeOfProduct;
-	}
-
-	public void setItemTypeOfProduct(Product itemTypeOfProduct) {
-		this.itemTypeOfProduct = itemTypeOfProduct;
-	}
-
-	public long getProductID() {
-		return productID;
-	}
-
-	public void setProductID(long produuctID) {
-		this.productID = produuctID;
+	public void setProductID(Product produuctID) {
+		this.productIdFk = produuctID;
 	}
 
 	public int getOrderItemCount() {
@@ -68,7 +63,6 @@ public class OrderItem {
 	}
 
 	public double getCostPerItem() {
-		costPerItem = this.itemTypeOfProduct.getProductCost()*this.orderItemCount;
 		return costPerItem;
 	}
 
@@ -78,14 +72,13 @@ public class OrderItem {
 
 	@Override
 	public String toString() {
-		return "OrderItem [orderItemID=" + orderItemID + ", itemTaggedToCart=" + itemTaggedToCart + ", cartID=" + cartID
-				+ ", itemTypeOfProduct=" + itemTypeOfProduct + ", produuctID=" + productID + ", orderItemCount="
-				+ orderItemCount + ", costPerItem=" + costPerItem + "]";
+		return "OrderItem [orderItemID=" + orderItemId + ", cartID=" + cartIdFk + ", productID=" + productIdFk
+				+ ", orderItemCount=" + orderItemCount + ", costPerItem=" + costPerItem + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cartID, orderItemCount, orderItemID, productID);
+		return Objects.hash(cartIdFk, costPerItem, orderItemCount, orderItemId, productIdFk);
 	}
 
 	@Override
@@ -97,9 +90,12 @@ public class OrderItem {
 		if (getClass() != obj.getClass())
 			return false;
 		OrderItem other = (OrderItem) obj;
-		return cartID == other.cartID && orderItemCount == other.orderItemCount && orderItemID == other.orderItemID
-				&& productID == other.productID;
+		return Objects.equals(cartIdFk, other.cartIdFk)
+				&& Double.doubleToLongBits(costPerItem) == Double.doubleToLongBits(other.costPerItem)
+				&& orderItemCount == other.orderItemCount && orderItemId == other.orderItemId
+				&& Objects.equals(productIdFk, other.productIdFk);
 	}
-	
-	
+
+
+
 }

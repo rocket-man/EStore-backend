@@ -2,6 +2,7 @@ package com.estore.application.v1.models;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,7 @@ public class User {
 	private String userType;
 
 	@OneToOne
-	private Cart taggedCart;
+	private Cart cartIdFk;
 
 	public String getUserName() {
 		return userName;
@@ -49,11 +50,11 @@ public class User {
 	}
 
 	public Cart getTaggedCart() {
-		return taggedCart;
+		return cartIdFk;
 	}
 
-	public void setTaggedCart(Cart taggedCart) {
-		this.taggedCart = taggedCart;
+	public void setTaggedCart(Cart cartID) {
+		this.cartIdFk = cartID;
 	}
 
 	public long getUserID() {
@@ -63,7 +64,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", userName=" + userName + ", userType=" + userType + ", taggedCart="
-				+ taggedCart + "]";
+				+ cartIdFk + "]";
 	}
 
 	@Override
